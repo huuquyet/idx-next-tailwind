@@ -1,24 +1,26 @@
 {
-	"name": "idx-next-tailwind",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint"
-	},
-	"dependencies": {
-		"react": "^18",
-		"react-dom": "^18",
-		"next": "14.3.0-canary.9"
-	},
-	"devDependencies": {
-		"typescript": "^5",
-		"@types/node": "^20",
-		"@types/react": "^18",
-		"@types/react-dom": "^18",
-		"postcss": "^8",
-		"tailwindcss": "^3.4.1"
-	}
+  "name": "idx-next-tailwind",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "git clean -xdf",
+    "build": "bunx next build",
+    "dev": "bunx next dev",
+    "lint": "bunx @biomejs/biome check --write .",
+    "start": "bunx next start"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "^14.2.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
 }
