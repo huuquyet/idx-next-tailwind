@@ -1,12 +1,12 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
   "organizeImports": {
     "enabled": true
   },
 
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["./node_modules", "./.pnp*", "./.next", "./.vercel", "./.vscode", "./dist"]
+    "ignore": ["./node_modules", "./.next", "./.vercel", "./dist", "./public"]
   },
   "linter": {
     "enabled": true,
