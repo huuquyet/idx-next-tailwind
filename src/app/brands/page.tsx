@@ -1,6 +1,6 @@
 'use client'
 
-import notebook from '@/@d3/bar-chart-race'
+import { define as notebook } from '@/@d3/bar-chart-race'
 import { Inspector, Runtime } from '@observablehq/runtime'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'

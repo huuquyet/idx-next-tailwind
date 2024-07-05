@@ -274,7 +274,7 @@ function _marginLeft(){return(
 0
 )}
 
-export default function define(runtime, observer) {
+export function define(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
