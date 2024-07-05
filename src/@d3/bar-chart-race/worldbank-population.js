@@ -59,12 +59,12 @@ function _n(){return(
 )}
 
 function _names(data){return(
-new Set(data.map(d => d['Country Name']))
+new Set(data.map(d => d.name))
 )}
 
 function _datevalues(d3,data){return(
-Array.from(d3.rollup(data, ([d]) => d['Value'], d => +d['Year'], d => d['Country Name']))
-  .map(([date, data]) => [new Date(date), data])
+Array.from(d3.rollup(data, ([d]) => d.value, d => +d.date, d => d.name))
+  .map(([date, data]) => [new Date(date, 0, 1), data])
   .sort(([a], [b]) => d3.ascending(a, b))
 )}
 
@@ -100,7 +100,7 @@ function _keyframes(d3,datevalues,k,rank)
 
 
 function _nameframes(d3,keyframes){return(
-d3.groups(keyframes.flatMap(([, data]) => data), d => d['Country Name'])
+d3.groups(keyframes.flatMap(([, data]) => data), d => d.name)
 )}
 
 function _prev(nameframes,d3){return(
@@ -117,8 +117,8 @@ function bars(svg) {
       .attr("fill-opacity", 0.6)
     .selectAll("rect");
 
-  return ([date, data], transition) => bar = bar
-    .data(data.slice(0, n), d => d['Country Name'])
+  return ([_date, data], transition) => bar = bar
+    .data(data.slice(0, n), d => d.name)
     .join(
       enter => enter.append("rect")
         .attr("fill", color)
@@ -146,8 +146,8 @@ function labels(svg) {
       .attr("text-anchor", "end")
     .selectAll("text");
 
-  return ([date, data], transition) => label = label
-    .data(data.slice(0, n), d => d['Country Name'])
+  return ([_date, data], transition) => label = label
+    .data(data.slice(0, n), d => d.name)
     .join(
       enter => enter.append("text")
         .attr("transform", d => `translate(${x((prev.get(d) || d).value)},${y((prev.get(d) || d).rank)})`)
@@ -233,7 +233,7 @@ function _color(d3,data)
 {
   const scale = d3.scaleOrdinal(d3.schemeTableau10);
   if (data.some(d => d.category !== undefined)) {
-    const categoryByName = new Map(data.map(d => [d['Country Name'], d['Country Code']]))
+    const categoryByName = new Map(data.map(d => [d.name, d.code]))
     scale.domain(categoryByName.values());
     return d => scale(categoryByName.get(d.name));
   }
