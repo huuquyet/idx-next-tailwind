@@ -6,6 +6,8 @@ md`<div style="color: grey; font: 13px/25.5px var(--sans-serif); text-transform:
 This chart animates the value (in $M) of the top global brands from 2000 to 2019. Color indicates sector. See [the explainer](/d/e9e3929cf7c50b45) for more. Data: [Interbrand](https://www.interbrand.com/best-brands/)`
 )}
 
+const EXCLUDE_CODES = ['AFE', 'AFW', 'ARB', 'CEB', 'WLD', 'IBT', 'LIC', 'LMC', 'LMY', 'MEA', 'MIC', 'MNA', 'TMN', 'UMC', 'IBD', 'TEA', 'IDA', 'IDB', 'EAR', 'EAS', 'EAP', 'ECA', 'ECS', 'LTE', 'PSS', 'PST', 'TEC', 'HIC', 'LAC', 'SSA', 'OED', 'SAS', 'TSA', 'IDX', 'SSF', 'TSS', 'LDC', 'FCS', 'EMU', 'EUU', 'TLA', 'CSS', 'LAC', 'LCN', 'PRE', 'PST', 'HPC', 'NAC']
+
 function _data(FileAttachment){return(
 FileAttachment("population.csv").csv({typed: true})
 )}
@@ -51,19 +53,20 @@ async function* _chart(replay,d3,width,height,bars,axis,labels,ticker,keyframes,
 
 
 function _duration(){return(
-250
+50
 )}
 
 function _n(){return(
-12
+16
 )}
 
 function _names(data){return(
-new Set(data.map(d => d.name))
+new Set(data.filter(d => !EXCLUDE_CODES.includes(d.code)).map(d => d.name))
 )}
 
-function _datevalues(d3,data){return(
-Array.from(d3.rollup(data, ([d]) => d.value, d => +d.date, d => d.name))
+function _datevalues(d3,data){
+  data = data.filter(d => !EXCLUDE_CODES.includes(d.code))
+  return(Array.from(d3.rollup(data, ([d]) => d.value, d => +d.date, d => d.name))
   .map(([date, data]) => [new Date(date, 0, 1), data])
   .sort(([a], [b]) => d3.ascending(a, b))
 )}
