@@ -12,7 +12,6 @@
     "start": "bunx next start"
   },
   "dependencies": {
-    "@d3/bar-chart-race": "https://api.observablehq.com/@d3/bar-chart-race.tgz?v=3",
     "@observablehq/runtime": "^5.9.8",
     "@tauri-apps/api": "^1.6.0",
     "next": "^14.2.4",
