@@ -7,7 +7,7 @@ This chart animates the value (in $M) of the top global brands from 2000 to 2019
 )}
 
 function _data(FileAttachment){return(
-FileAttachment("category-brands.csv").csv({typed: true})
+FileAttachment("population.csv").csv({typed: true})
 )}
 
 function _replay(html){return(
@@ -59,11 +59,11 @@ function _n(){return(
 )}
 
 function _names(data){return(
-new Set(data.map(d => d.name))
+new Set(data.map(d => d['Country Name']))
 )}
 
 function _datevalues(d3,data){return(
-Array.from(d3.rollup(data, ([d]) => d.value, d => +d.date, d => d.name))
+Array.from(d3.rollup(data, ([d]) => d['Value'], d => +d['Year'], d => d['Country Name']))
   .map(([date, data]) => [new Date(date), data])
   .sort(([a], [b]) => d3.ascending(a, b))
 )}
@@ -100,7 +100,7 @@ function _keyframes(d3,datevalues,k,rank)
 
 
 function _nameframes(d3,keyframes){return(
-d3.groups(keyframes.flatMap(([, data]) => data), d => d.name)
+d3.groups(keyframes.flatMap(([, data]) => data), d => d['Country Name'])
 )}
 
 function _prev(nameframes,d3){return(
@@ -118,7 +118,7 @@ function bars(svg) {
     .selectAll("rect");
 
   return ([date, data], transition) => bar = bar
-    .data(data.slice(0, n), d => d.name)
+    .data(data.slice(0, n), d => d['Country Name'])
     .join(
       enter => enter.append("rect")
         .attr("fill", color)
@@ -142,11 +142,12 @@ function labels(svg) {
   let label = svg.append("g")
       .style("font", "bold 12px var(--sans-serif)")
       .style("font-variant-numeric", "tabular-nums")
+      .style("fill", "white")
       .attr("text-anchor", "end")
     .selectAll("text");
 
   return ([date, data], transition) => label = label
-    .data(data.slice(0, n), d => d.name)
+    .data(data.slice(0, n), d => d['Country Name'])
     .join(
       enter => enter.append("text")
         .attr("transform", d => `translate(${x((prev.get(d) || d).value)},${y((prev.get(d) || d).rank)})`)
@@ -211,6 +212,7 @@ function ticker(svg) {
   const now = svg.append("text")
       .style("font", `bold ${barSize}px var(--sans-serif)`)
       .style("font-variant-numeric", "tabular-nums")
+      .style("fill", "white")
       .attr("text-anchor", "end")
       .attr("x", width - 6)
       .attr("y", marginTop + barSize * (n - 0.45))
@@ -231,7 +233,7 @@ function _color(d3,data)
 {
   const scale = d3.scaleOrdinal(d3.schemeTableau10);
   if (data.some(d => d.category !== undefined)) {
-    const categoryByName = new Map(data.map(d => [d.name, d.category]))
+    const categoryByName = new Map(data.map(d => [d['Country Name'], d['Country Code']]))
     scale.domain(categoryByName.values());
     return d => scale(categoryByName.get(d.name));
   }
@@ -274,11 +276,11 @@ function _marginLeft(){return(
 0
 )}
 
-export function brands(runtime, observer) {
+export function population(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
-    ["category-brands.csv", {url: new URL("./files/aec3792837253d4c6168f9bbecdf495140a5f9bb1cdb12c7c8113cec26332634a71ad29b446a1e8236e0a45732ea5d0b4e86d9d1568ff5791412f093ec06f4f1.csv", import.meta.url), mimeType: "text/csv", toString}]
+    ["population.csv", {url: new URL("./files/API_SP.POP.TOTL_DS2_en_csv_v2_435604_LIST.csv", import.meta.url), mimeType: "text/csv", toString}]
   ]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
