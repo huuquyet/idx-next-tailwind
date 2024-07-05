@@ -6,7 +6,7 @@
 
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["./node_modules", "./.next", "./.vercel", "./dist", "./public"]
+    "ignore": ["./node_modules", "./.next", "./.vercel", "./dist", "./public", "./**/target"]
   },
   "linter": {
     "enabled": true,
