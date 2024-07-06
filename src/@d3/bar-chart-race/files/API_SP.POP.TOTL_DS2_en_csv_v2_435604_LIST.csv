@@ -1,4 +1,4 @@
-﻿name,code,"Indicator Name","Indicator Code",date,value
+﻿"name","code","Indicator Name","Indicator Code","year","value"
 "Aruba","ABW","Population, total","SP.POP.TOTL","1960","54608"
 "Aruba","ABW","Population, total","SP.POP.TOTL","1961","55811"
 "Aruba","ABW","Population, total","SP.POP.TOTL","1962","56682"

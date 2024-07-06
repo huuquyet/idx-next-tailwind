@@ -66,8 +66,8 @@ new Set(data.filter(d => !EXCLUDE_CODES.includes(d.code)).map(d => d.name))
 
 function _datevalues(d3,data){
   data = data.filter(d => !EXCLUDE_CODES.includes(d.code))
-  return(Array.from(d3.rollup(data, ([d]) => d.value, d => +d.date, d => d.name))
-  .map(([date, data]) => [new Date(date, 0, 1), data])
+  return(Array.from(d3.rollup(data, ([d]) => d.value, d => +d.year, d => d.name))
+  .map(([year, data]) => [new Date(year, 0, 1), data])
   .sort(([a], [b]) => d3.ascending(a, b))
 )}
 
@@ -235,7 +235,7 @@ d3.utcFormat("%Y")
 function _color(d3,data)
 {
   const scale = d3.scaleOrdinal(d3.schemeTableau10);
-  if (data.some(d => d.category !== undefined)) {
+  if (data.some(d => d.code !== undefined)) {
     const categoryByName = new Map(data.map(d => [d.name, d.code]))
     scale.domain(categoryByName.values());
     return d => scale(categoryByName.get(d.name));
