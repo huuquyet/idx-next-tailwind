@@ -3,7 +3,7 @@ function _1(md: any) {
 
 # Bar Chart Race
 
-This chart animates the population of the top countries from 1960 to 2023. Color indicates sector. Data: [Worldbank](https://data.worldbank.org/indicator/SP.POP.TOTL)`
+This chart animates the GDP of the top countries from 1960 to 2023. Color indicates sector. Data: [Worldbank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)`
 }
 
 const EXCLUDE_CODES = [
@@ -414,7 +414,7 @@ export function population(runtime: any, observer: any) {
     [
       'population.csv',
       {
-        url: new URL('./files/API_SP.POP.TOTL_DS2_en_csv_v2_435604_LIST.csv', import.meta.url),
+        url: new URL('./files/API_NY.GDP.MKTP.CD_DS2_en_csv_v2_620808_LIST.csv', import.meta.url),
         mimeType: 'text/csv',
       },
     ],
