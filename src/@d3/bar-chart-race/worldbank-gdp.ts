@@ -59,7 +59,7 @@ const EXCLUDE_CODES = [
 ]
 
 function _data(FileAttachment: any) {
-  return FileAttachment('population.csv').csv({ typed: true })
+  return FileAttachment('gdp.csv').csv({ typed: true })
 }
 
 function _replay(html: any) {
@@ -408,11 +408,11 @@ function _marginLeft() {
   return 0
 }
 
-export function population(runtime: any, observer: any) {
+export function gdp(runtime: any, observer: any) {
   const main = runtime.module()
   const fileAttachments = new Map([
     [
-      'population.csv',
+      'gdp.csv',
       {
         url: new URL('./files/API_NY.GDP.MKTP.CD_DS2_en_csv_v2_620808_LIST.csv', import.meta.url),
         mimeType: 'text/csv',
