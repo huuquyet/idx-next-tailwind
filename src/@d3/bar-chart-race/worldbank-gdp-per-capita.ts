@@ -59,7 +59,7 @@ const EXCLUDE_CODES = [
 ]
 
 function _data(FileAttachment: any) {
-  return FileAttachment('gdp.csv').csv({ typed: true })
+  return FileAttachment('worldbank.csv').csv({ typed: true })
 }
 
 function _replay(html: any) {
@@ -411,13 +411,7 @@ function _marginLeft() {
 export function gdpPerCapita(runtime: any, observer: any) {
   const main = runtime.module()
   const fileAttachments = new Map([
-    [
-      'gdp.csv',
-      {
-        url: new URL('./files/API_NY.GDP.PCAP.CD_DS2_en_csv_v2_622726_LIST.csv', import.meta.url),
-        mimeType: 'text/csv',
-      },
-    ],
+    ['worldbank.csv', '/files/API_NY.GDP.PCAP.CD_DS2_en_csv_v2_622726_LIST.csv'],
   ])
   main.builtin(
     'FileAttachment',

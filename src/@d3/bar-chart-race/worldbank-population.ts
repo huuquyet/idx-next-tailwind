@@ -59,7 +59,7 @@ const EXCLUDE_CODES = [
 ]
 
 function _data(FileAttachment: any) {
-  return FileAttachment('population.csv').csv({ typed: true })
+  return FileAttachment('worldbank.csv').csv({ typed: true })
 }
 
 function _replay(html: any) {
@@ -411,13 +411,7 @@ function _marginLeft() {
 export function population(runtime: any, observer: any) {
   const main = runtime.module()
   const fileAttachments = new Map([
-    [
-      'population.csv',
-      {
-        url: new URL('./files/API_SP.POP.TOTL_DS2_en_csv_v2_435604_LIST.csv', import.meta.url),
-        mimeType: 'text/csv',
-      },
-    ],
+    ['worldbank.csv', '/files/API_SP.POP.TOTL_DS2_en_csv_v2_435604_LIST.csv'],
   ])
   main.builtin(
     'FileAttachment',
