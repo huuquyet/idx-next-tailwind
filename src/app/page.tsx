@@ -55,7 +55,9 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">GDP per capita data from Worldbank [1960-2023]</p>
+          <p className="m-0 max-w-[30ch] text-sm opacity-50">
+            GDP per capita data from Worldbank [1960-2023]
+          </p>
         </Link>
 
         <Link
